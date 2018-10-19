@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title= clickedTitle
+    -var i = 0;
+    while i < 10
+      br
+      p= 'lastBuildDate: ' + obj.lastBuildDate
+      p= 'total: ' + obj.total
+      p= 'title: ' + obj.items[i].title
+      p= 'link: ' + obj.items[i].link
+      p= 'description: ' + obj.items[i].description
+      p= 'bloggername: ' + obj.items[i].bloggername
+      p= 'bloggerlink: ' + obj.items[i].bloggerlink
+      p= 'postdate: ' + obj.items[i].postdate
+      hr
+      - i++;

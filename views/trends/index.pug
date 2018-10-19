@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title Trends - 2017, KR
+    .topcharts-category-charts-container
+        - var i = 0;
+        - var j = 0;
+        while i < 8
+          ul.list-group.topcharts-category-container
+            li.list-group-item.list-group-item-action.active= obj.data.chartList[i].trendingChart.visibleName
+              
+            - j = 0;
+            while j < 10
+              li.list-group-item.list-group-item-action
+                a(href='http://localhost:3000/trends/search/blog/'+i+j)= j+1 + '. ' + obj.data.chartList[i].trendingChart.entityList[j].title
+              - j++;
+            - i++;
