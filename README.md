@@ -1,4 +1,4 @@
-# NAVER-CAMPUS-HACKDAY
+# NAVER-CAMPUS-HACKDAY-RESUME
 
 7. Trends(트렌드 모아보기)
 
