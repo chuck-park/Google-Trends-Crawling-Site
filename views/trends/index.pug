@@ -13,6 +13,7 @@ block content
             - j = 0;
             while j < 10
               li.list-group-item.list-group-item-action
-                a(href='http://localhost:3000/trends/search/blog/'+i+j)= j+1 + '. ' + obj.data.chartList[i].trendingChart.entityList[j].title
+                //-TODO: 서버 아이피로 변경 필요 
+                a(href='http://localhost:3000/trends/details/'+i+j)= j+1 + '. ' + obj.data.chartList[i].trendingChart.entityList[j].title
               - j++;
             - i++;

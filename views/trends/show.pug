@@ -3,16 +3,47 @@ extends ../layout
 block content
   .container
     h1.main-title= clickedTitle
-    -var i = 0;
-    while i < 10
+    br
+    .wiki-container
+      h5.sub-title 위키정보
+      br 
+      .detail-image
+        img(src= youtubeObj.items[0].snippet.thumbnails.high.url)
+        br 
+        br 
+        br 
+
+    .ytm-playlist
+      h5.sub-title Youtube Playlist
       br
-      p= 'lastBuildDate: ' + obj.lastBuildDate
-      p= 'total: ' + obj.total
-      p= 'title: ' + obj.items[i].title
-      p= 'link: ' + obj.items[i].link
-      p= 'description: ' + obj.items[i].description
-      p= 'bloggername: ' + obj.items[i].bloggername
-      p= 'bloggerlink: ' + obj.items[i].bloggerlink
-      p= 'postdate: ' + obj.items[i].postdate
-      hr
-      - i++;
+      .ytm-playlist-panel-header
+        .div
+          .playlist-content
+            -var i = 0;
+            while i < 5
+              .compact-media-item
+                a.compact-media-item-image(href='https://www.youtube.com/watch?v=' + youtubeObj.items[i].id.videoId)
+                  .video-thumbnail-container-compact
+                    img.video-thumbnail-img(src= youtubeObj.items[i].snippet.thumbnails.default.url)
+                .compact-media-item-metadata
+                  a.compact-media-item-metadata-content(href='https://www.youtube.com/watch?v=' + youtubeObj.items[i].id.videoId)
+                    h4.compact-media-item-headline= youtubeObj.items[i].snippet.title
+                    .compact-media-item-byline= youtubeObj.items[i].snippet.channelTitle
+                    - i++;
+
+    .blog-review-container
+      h5.sub-title 블로그리뷰
+      br
+      .blog-list
+      -var i = 0;
+      while i < 10
+        p= 'lastBuildDate: ' + blogObj.lastBuildDate
+        p= 'total: ' + blogObj.total
+        p= 'title: ' + blogObj.items[i].title
+        p= 'link: ' + blogObj.items[i].link
+        p= 'description: ' + blogObj.items[i].description
+        p= 'bloggername: ' + blogObj.items[i].bloggername
+        p= 'bloggerlink: ' + blogObj.items[i].bloggerlink
+        p= 'postdate: ' + blogObj.items[i].postdate
+        hr
+        - i++;

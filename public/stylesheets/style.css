@@ -37,6 +37,15 @@ body {
   border-bottom: 1px solid #eee;
   color: #011a72; }
 
+.sub-title {
+  font-family: 'Raleway';
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 1em 0 0.5em 0;
+  border-bottom: 1px solid #eee;
+  color: #011a72;
+  text-align: center; }
+
 .header > .navbar {
   margin-top: 1em;
   background-color: #ffffff2f !important; }
@@ -104,5 +113,35 @@ body {
   transition-duration: 0.2s;
   transition-property: box-shadow;
   width: 293px; }
+
+.wiki-container {
+  width: 60%;
+  float: left; }
+  .wiki-container .detail-image {
+    margin-left: 6em; }
+
+.ytm-playlist {
+  width: 30%;
+  float: left;
+  margin-left: 5em; }
+  .ytm-playlist .ytm-playlist-panel-header .div .playlist-content .compact-media-item {
+    display: flex;
+    margin-top: 1em;
+    margin-bottom: 1em; }
+  .ytm-playlist .ytm-playlist-panel-header .div .playlist-content .compact-media-item-metadata {
+    margin-left: 1em;
+    border-bottom: 1px solid #eee; }
+    .ytm-playlist .ytm-playlist-panel-header .div .playlist-content .compact-media-item-metadata .compact-media-item-metadata-content {
+      text-decoration: none; }
+      .ytm-playlist .ytm-playlist-panel-header .div .playlist-content .compact-media-item-metadata .compact-media-item-metadata-content .compact-media-item-headline {
+        font-size: 0.8rem;
+        color: #011a72; }
+      .ytm-playlist .ytm-playlist-panel-header .div .playlist-content .compact-media-item-metadata .compact-media-item-metadata-content .compact-media-item-byline {
+        font-size: 0.7rem;
+        margin-bottom: 1em;
+        color: #979797; }
+
+.blog-review-container {
+  width: 60%; }
 
 /*# sourceMappingURL=style.css.map */

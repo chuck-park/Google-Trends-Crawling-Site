@@ -44,6 +44,16 @@ body {
   color: #011a72;
 }
 
+.sub-title {
+  font-family: 'Raleway';
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 1em 0 0.5em 0;
+  border-bottom: 1px solid #eee;
+  color: #011a72;
+  text-align: center;
+}
+
 .header > .navbar {
   margin-top: 1em;
   background-color: #ffffff2f!important;
@@ -130,5 +140,70 @@ body {
   // transition-timing-function: ease-out;
   width: 293px;
 }
+
+// Wiki
+.wiki-container {
+  width: 60%;
+  float: left;
+
+  .detail-image {
+    margin-left: 6em;
+  }
+}
+
+
+
+// Youtube playlist
+.ytm-playlist {
+  width: 30%;
+  float: left;
+  margin-left:5em;
+  .ytm-playlist-panel-header {
+    .div {
+      .playlist-content {
+        .compact-media-item {
+          display: flex;
+          margin-top: 1em;
+          margin-bottom: 1em;
+          .compact-media-item-image {
+            .video-thumbnail-container-compact {
+              .video-thumbnail-img {
+                
+              }
+            }
+          }
+        }
+        .compact-media-item-metadata {
+          margin-left: 1em;
+          border-bottom: 1px solid #eee;
+          .compact-media-item-metadata-content {
+            text-decoration: none;
+            .compact-media-item-headline {
+              font-size: 0.8rem;
+              color: #011a72;
+            }
+            .compact-media-item-byline {
+              font-size: 0.7rem;
+              margin-bottom: 1em;
+              color: #979797;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+// Naver blog
+.blog-review-container {
+  width: 60%;
+}
+
+.blog-list {
+
+}
+
 
 
