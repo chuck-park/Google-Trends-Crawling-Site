@@ -7,183 +7,110 @@ const router = express.Router();
 const categoryNum = 8;
 const titleNum = 10;
 
-// Naver API Key
-const client_id = 'rcB_GneSUHAEXt5u2l44'; 
-const client_secret = process.env.NAVER_API;
+// API Keys
+const naver_client_id = 'rcB_GneSUHAEXt5u2l44'; 
+const naver_client_secret = process.env.NAVER_API;
 const youtube_key = process.env.YOUTUBE_API;
 
-
+// 공식 API가 없고 npm의 google-trends-api 모듈에 daliy trend에 관한 함수가 없어 직접 크롤링함.
 // Google trends Topcharts crawling(2017, KR)
 router.get('/', catchErrors(async (req, res, next) => {
-  console.log(youtube_key)
-  const url = 'https://trends.google.com/trends/topcharts/category';
 
-  // TODO: date와 geo 선택 옵션 추가, 함수화 하여 중복 제거
-  request.post({url:url, form:{ajax:1, date:2017, geo:'KR'}}, function(error, response, body) {
-    if(!error && response.statusCode == 200) {
-      let obj = JSON.parse(body);
-      res.render('trends/index', {obj:obj})
-    } else {
-      res.status(response.statusCode).end();
-      console.log('error: ' + response.statusCode)
-    }
-  });
-}));
+  const url = 'https://trends.google.co.kr/trends/api/dailytrends?hl=ko&tz=-540&geo=KR&ns=15';
 
-// clicked title을 네이버 블로그 API를 이용하여 검색 
-router.get('/search/blog', async function(req, res, next) {
-  console.log(req.param)
-  let api_url = 'https://openapi.naver.com/v1/search/blog?query=' + encodeURI(req.query.query); // json 결과
-  let options = {
-    url: api_url,
-    headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret}
-  };
-  request.get(options, function (error, response, body) {
+  request.get(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-      res.end(body);
-    } else {
-      res.status(response.statusCode).end();
-      console.log('error: ' + response.statusCode)
-    }
-  });
-});
+      // res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
+      // res.end(body);
+      body = body.slice(5, body.length) // remove useless parentheses
+      let trendsObj = JSON.parse(body);
 
-// TODO: blog 외의 옵션 추가
-// clicked title에 맞는 상세 정보를 출력
-router.get('/search/blog/:id', catchErrors(async (req, res, next) => {
-  let path = req._parsedOriginalUrl.path // a(href='')에서 post를 사용할 수 없어 사용함.
-  let id = path.slice(-2)
-  const categoryCode = id.slice(0, 1)
-  const titleCode = id.slice(-1)
-
-  const url = 'https://trends.google.com/trends/topcharts/category';
-
-  // TODO: date와 geo 선택 옵션 추가, 함수화 하여 중복 제거
-  // Database를 사용하지 않았기 때문에 크롤링 데이터를 배열화하여 선택한 데이터를 알아냄
-  request.post({url:url, form:{ajax:1, date:2017, geo:'KR'}}, function(error, response, body) {
-    if(!error && response.statusCode == 200) {
-      let obj = JSON.parse(body);
-      let arr = new Array(categoryNum);
-      for(let i = 0; i < categoryNum; i++) {
-        arr[i] = new Array(titleNum); 
-      }
-      for(let i = 0; i < categoryNum; i++) {
-        arr[i][0] = obj.data.chartList[i].trendingChart.visibleName
-        for (let j = 0; j < titleNum; j++) {
-          arr[i][j+1] = obj.data.chartList[i].trendingChart.entityList[j].title
-        }
-      }
-      
-      let clickedTitle = obj.data.chartList[categoryCode].trendingChart.entityList[titleCode].title
-      console.log(clickedTitle.trim())
-      
-      // Naver Search API
-      let api_url = 'https://openapi.naver.com/v1/search/blog?query=' + encodeURI(clickedTitle.trim()); // json 결과
-      let options = {
-        url: api_url,
-        headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret':client_secret}
-      };
-
-      request.get(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-          // res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-          // res.end(body);
-          // console.log(body)
-          let obj = JSON.parse(body);
-          res.render('trends/show', {clickedTitle:clickedTitle, obj:obj})
-        } else {
-          console.log('error!: ' + response)
-        }
-      });
+      let trendsLengthToday = trendsObj.default.trendingSearchesDays[0].trendingSearches.length
+      // let trendsLengthYesterday = trendsObj.default.trendingSearchesDays[1].trendingSearches.length
+      res.render('trends/index', {trendsObj:trendsObj, trendsLengthToday:trendsLengthToday})
     } else {
       res.status(response.statusCode).end();
       console.log('error: ' + response.statusCode)
     }
   });
 }));
-
-// function searchBlog(clickedTitle) {
-//   // Naver Search API
-//   let api_url = 'https://openapi.naver.com/v1/search/blog?query=' + encodeURI(clickedTitle.trim()); // json 결과
-//   let options = {
-//     url: api_url,
-//     headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret':client_secret}
-//   };
-
-//   request.get(options, function (error, response, body) {
-//     if (!error && response.statusCode == 200) {
-//       // res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-//       // res.end(body);
-//       // console.log(body)
-//       let obj = JSON.parse(body);
-//       return obj;
-//     } else {
-//       console.log('error!: ');
-//       return response;
-//     }
-//   });
-// }
 
 // clicked title에 맞는 상세 정보를 출력
 router.get('/details/:id', catchErrors(async (req, res, next) => {
 
-  const url = 'https://trends.google.com/trends/topcharts/category'; // google trends topchart 
-
-  let path = req._parsedOriginalUrl.path; // a(href='')에서 post를 사용할 수 없어 사용함.
-  let id = path.slice(-2);
-  const categoryCode = id.slice(0, 1);
-  const titleCode = id.slice(-1);
-  let clickedTitle = '';
-  var blogObj;
-  var youtubeObj;
+  const url = 'https://trends.google.co.kr/trends/api/dailytrends?hl=ko&tz=-540&geo=KR&ns=15'; // google trends dailytrends
   
   // TODO: date와 geo 선택 옵션 추가, 함수화 하여 중복 제거
   // Database를 사용하지 않았기 때문에 크롤링 데이터를 배열화하여 선택한 데이터를 알아냄
-  request.post({url:url, form:{ajax:1, date:2017, geo:'KR'}}, function(error, response, body) {
+  request.get(url, function(error, response, body) {
     if(!error && response.statusCode == 200) {
-      const googleObj = JSON.parse(body);
-      let arr = new Array(categoryNum);
-      for(let i = 0; i < categoryNum; i++) {
-        arr[i] = new Array(titleNum); 
-      }
-      for(let i = 0; i < categoryNum; i++) {
-        arr[i][0] = googleObj.data.chartList[i].trendingChart.visibleName
-        for (let j = 0; j < titleNum; j++) {
-          arr[i][j+1] = googleObj.data.chartList[i].trendingChart.entityList[j].title
-        }
-      }
-      
-      clickedTitle = googleObj.data.chartList[categoryCode].trendingChart.entityList[titleCode].title
-      
+      body = body.slice(5, body.length) // remove useless parentheses
+      const trendsObj = JSON.parse(body);
+      // let day = (req.params.id).slice(0, 1)
+      // let rank = (req.params.id).slice(1, 2)
+      let clickedTitle = (req.params.id)
+
       // Naver Search API
       let naver_api_url = 'https://openapi.naver.com/v1/search/blog?query=' + encodeURI(clickedTitle.trim()); // json 결과
       let naver_options = {
         url: naver_api_url,
-        headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret':client_secret}
+        headers: {'X-Naver-Client-Id':naver_client_id, 'X-Naver-Client-Secret':naver_client_secret}
       };
-      
       // Youtube API
-      let youtube_api_url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + encodeURI(clickedTitle.trim()) + '&key=' + youtube_key; // json 결과
+      let youtube_api_url = 'https://www.googleapis.com/youtube/v3/search?maxResults=25&part=snippet&q=' + encodeURI(clickedTitle.trim()) + '&key=' + youtube_key; // json 결과
       let youtube_options = {
-        url: youtube_api_url
+        url: youtube_api_url,
       }
       
-
+      
       // Naver
       request.get(naver_options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           // res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
           // res.end(body);
-          blogObj = JSON.parse(body);
+          let blogObj = JSON.parse(body);
+          // console.log(blogObj)
+          
+          // remake blog content link (bloggerlink + '/' + contentNum)
+          let i = 0;
+          while(i < blogObj.items.length) {
+            let linkLength = blogObj.items[i].link.length;
+            let contentNum = blogObj.items[i].link.substring(linkLength-12, linkLength)
+            blogObj.items[i].link = blogObj.items[i].bloggerlink + '/' + contentNum
+            i++;
+          }
+
+          // remove <b> </b> text from title, description
+          function regEx(target) {
+            switch(target) {
+              case "<b>": return "";
+              case "</b>": return "";
+              case "&lt;": return "<";
+              case "&gt;": return ">";
+              case "&quot;": return "";
+            }
+          }
+
+          i = 0;
+          while(i < blogObj.items.length) {
+            let title = blogObj.items[i].title;
+            let desc = blogObj.items[i].description;
+            title = title.replace(/<b>|<\/b>|\&lt;|\&gt;|&quot;/g, regEx);
+            desc = desc.replace(/<b>|<\/b>|\&lt;|\&gt;|&quot;/g, regEx);
+            blogObj.items[i].title = title;
+            blogObj.items[i].description = desc;
+            // console.log(desc)
+            i++;
+          }
 
           // Youtube
           request.get(youtube_options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
               // res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
               // res.end(body);
-              youtubeObj = JSON.parse(body);
-              res.render('trends/show', {clickedTitle:clickedTitle, blogObj:blogObj, youtubeObj:youtubeObj});
+              let youtubeObj = JSON.parse(body);
+              // console.log(youtubeObj)
+              res.render('trends/show', {clickedTitle:clickedTitle, trendsObj:trendsObj, blogObj:blogObj, youtubeObj:youtubeObj});
             } else {
               console.log('Youtube error');
               return response;
@@ -194,28 +121,10 @@ router.get('/details/:id', catchErrors(async (req, res, next) => {
           return response;
         }
       });
+    } else { 
+      console.log('request error')
     }
   })
 }));
-  
-
-
-// router.get('/search/wiki', function(req, res, next) {
-//   console.log(req.param)
-//   let api_url = 'https://openapi.naver.com/v1/search/blog?query=' + encodeURI(req.query.query); // json 결과
-//   let options = {
-//     url: api_url,
-//     headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret}
-//   };
-//   request.get(options, function (error, response, body) {
-//     if (!error && response.statusCode == 200) {
-//       res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-//       res.end(body);
-//     } else {
-//       res.status(response.statusCode).end();
-//       console.log('error: ' + response.statusCode)
-//     }
-//   });
-// });
 
 module.exports = router;

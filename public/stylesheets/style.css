@@ -35,15 +35,14 @@ body {
   font-weight: bold;
   margin: 1em 0 0.5em 0;
   border-bottom: 1px solid #eee;
-  color: #011a72; }
+  color: #011a72;
+  padding-bottom: 8px; }
 
 .sub-title {
   font-family: 'Raleway';
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin: 1em 0 0.5em 0;
-  border-bottom: 1px solid #eee;
-  color: #011a72;
   text-align: center; }
 
 .header > .navbar {
@@ -85,21 +84,49 @@ body {
   font-size: 2.5rem;
   font-weight: bold;
   margin: 1em 0 0.5em 0;
-  border-bottom: 1px solid #eee;
   color: #ffffff; }
   .main-button:hover {
     color: #00c73c; }
 
-.topcharts-category-charts-container {
+.container .col-md-10 {
+  margin: auto; }
+
+.content-header-title {
+  margin-top: 3em;
+  margin-bottom: 2em; }
+
+.feed-list-wrapper {
   box-sizing: content-box;
-  font-size: 13px;
-  margin-top: 5em; }
-  .topcharts-category-charts-container li a {
-    display: block;
-    color: black; }
-    .topcharts-category-charts-container li a:hover {
+  font-size: 13px; }
+  .feed-list-wrapper .feed-item .details-wrapper {
+    box-sizing: border-box;
+    display: flex; }
+  .feed-list-wrapper .feed-item .index {
+    font-size: 1.75rem;
+    margin-right: 2em; }
+  .feed-list-wrapper .feed-item .title.mb-0 {
+    font-size: 1.75rem;
+    color: black;
+    margin-right: 4em;
+    flex: 1; }
+    .feed-list-wrapper .feed-item .title.mb-0:hover {
       color: #00c73c;
       text-decoration-line: none; }
+  .feed-list-wrapper .feed-item .search-count .visible {
+    font-size: 1.75rem;
+    flex: 1; }
+  .feed-list-wrapper .feed-item .feed-item-image-wrapper {
+    margin-left: 5em; }
+    .feed-list-wrapper .feed-item .feed-item-image-wrapper a {
+      text-decoration: none; }
+      .feed-list-wrapper .feed-item .feed-item-image-wrapper a:hover {
+        color: #00c73c;
+        text-decoration-line: none; }
+    .feed-list-wrapper .feed-item .feed-item-image-wrapper .image-text {
+      margin-top: 8px;
+      font-size: 0.7rem;
+      text-align: center;
+      width: 100px; }
 
 .topcharts-category-container {
   box-sizing: content-box;
@@ -116,9 +143,15 @@ body {
 
 .wiki-container {
   width: 60%;
-  float: left; }
+  float: left;
+  display: flex;
+  flex-direction: column; }
   .wiki-container .detail-image {
-    margin-left: 6em; }
+    margin-left: 6em;
+    padding-top: 16px; }
+    .wiki-container .detail-image img {
+      height: 20em;
+      width: 20em; }
 
 .ytm-playlist {
   width: 30%;
@@ -127,10 +160,10 @@ body {
   .ytm-playlist .ytm-playlist-panel-header .div .playlist-content .compact-media-item {
     display: flex;
     margin-top: 1em;
-    margin-bottom: 1em; }
+    margin-bottom: 1em;
+    padding-bottom: 8px; }
   .ytm-playlist .ytm-playlist-panel-header .div .playlist-content .compact-media-item-metadata {
-    margin-left: 1em;
-    border-bottom: 1px solid #eee; }
+    margin-left: 1em; }
     .ytm-playlist .ytm-playlist-panel-header .div .playlist-content .compact-media-item-metadata .compact-media-item-metadata-content {
       text-decoration: none; }
       .ytm-playlist .ytm-playlist-panel-header .div .playlist-content .compact-media-item-metadata .compact-media-item-metadata-content .compact-media-item-headline {
@@ -142,6 +175,27 @@ body {
         color: #979797; }
 
 .blog-review-container {
-  width: 60%; }
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  float: left; }
+  .blog-review-container .blog-list {
+    list-style: none;
+    margin-top: 2em; }
+    .blog-review-container .blog-list .blog-content-item {
+      text-decoration: none; }
+      .blog-review-container .blog-list .blog-content-item .blog-content-item-headline {
+        font-size: 1rem;
+        color: #011a72;
+        display: block;
+        margin-bottom: 5px; }
+      .blog-review-container .blog-list .blog-content-item .blog-content-item-byline {
+        font-size: 0.8rem;
+        color: #979797;
+        display: block;
+        margin-bottom: 5px; }
+    .blog-review-container .blog-list .blog-title-date {
+      font-size: 0.8rem; }
 
 /*# sourceMappingURL=style.css.map */

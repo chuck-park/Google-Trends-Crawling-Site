@@ -4,14 +4,19 @@ block content
   .container
     h1.main-title= clickedTitle
     br
-    .wiki-container
-      h5.sub-title 위키정보
-      br 
-      .detail-image
-        img(src= youtubeObj.items[0].snippet.thumbnails.high.url)
-        br 
-        br 
-        br 
+    .blog-review-container
+      h5.sub-title 블로그리뷰
+      br
+      .blog-list
+        -var i = 0;
+        while i < 10
+          li
+            a.blog-content-item(href=blogObj.items[i].link)
+              span.blog-content-item-headline= blogObj.items[i].title
+              span.blog-content-item-byline= blogObj.items[i].description
+            p.blog-title-date= blogObj.items[i].bloggername + ' ' + blogObj.items[i].postdate
+          hr
+          - i++;
 
     .ytm-playlist
       h5.sub-title Youtube Playlist
@@ -20,7 +25,7 @@ block content
         .div
           .playlist-content
             -var i = 0;
-            while i < 5
+            while i < 11
               .compact-media-item
                 a.compact-media-item-image(href='https://www.youtube.com/watch?v=' + youtubeObj.items[i].id.videoId)
                   .video-thumbnail-container-compact
@@ -31,19 +36,4 @@ block content
                     .compact-media-item-byline= youtubeObj.items[i].snippet.channelTitle
                     - i++;
 
-    .blog-review-container
-      h5.sub-title 블로그리뷰
-      br
-      .blog-list
-      -var i = 0;
-      while i < 10
-        p= 'lastBuildDate: ' + blogObj.lastBuildDate
-        p= 'total: ' + blogObj.total
-        p= 'title: ' + blogObj.items[i].title
-        p= 'link: ' + blogObj.items[i].link
-        p= 'description: ' + blogObj.items[i].description
-        p= 'bloggername: ' + blogObj.items[i].bloggername
-        p= 'bloggerlink: ' + blogObj.items[i].bloggerlink
-        p= 'postdate: ' + blogObj.items[i].postdate
-        hr
-        - i++;
+    
