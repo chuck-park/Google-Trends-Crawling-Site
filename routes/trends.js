@@ -9,8 +9,13 @@ const titleNum = 10;
 
 // API Keys
 const naver_client_id = 'rcB_GneSUHAEXt5u2l44'; 
-const naver_client_secret = process.env.NAVER_API;
-const youtube_key = process.env.YOUTUBE_API;
+
+// for heroku deploy
+const naver_client_secret = NAVER_API_KEY;
+const youtube_key = YOUTUBE_API_KEY;
+// for localhost
+// const naver_client_secret = process.env.NAVER_API_KEY;
+// const youtube_key = process.env.YOUTUBE_API_KEY;
 
 // 공식 API가 없고 npm의 google-trends-api 모듈에 daliy trend에 관한 함수가 없어 직접 크롤링함.
 // Google trends Topcharts crawling(2017, KR)
