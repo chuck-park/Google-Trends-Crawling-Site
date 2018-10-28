@@ -12,51 +12,11 @@ block content
               .feed-item.card-body.align-items-start
                 .details-wrapper
                   .index.d-inline-block.mb-2.text-primary= j+1
-                  a.title.mb-0(href='http://localhost:3000/trends/details/' + content.title.query)= content.title.query
+                  a.title.mb-0(href='/trends/details/' + content.title.query)= content.title.query
                   .search-count
                     p.visible.mb-1.text-muted= content.formattedTraffic
                   .feed-item-image-wrapper
                     a(href=content.image.newsUrl)
                       img(src=content.image.imageUrl)
                       .image-text= content.image.source
-        //- .content-header-title= trendsObj.default.trendingSearchesDays[0].formattedDate
-        //- - var endDate = trendsObj.default.endDateForNextRequest;
-        //- - var i = 0;
-        //- while i < trendsLengthToday
-        //-   .feed-list-wrapper.card
-        //-     .feed-item.card-body.align-items-start
-        //-       .details-wrapper
-        //-         .index.d-inline-block.mb-2.text-primary= i+1
-        //-         a.title.mb-0(href='http://localhost:3000/trends/details/' + trendsObj.default.trendingSearchesDays[0].trendingSearches[i].title.query)= trendsObj.default.trendingSearchesDays[0].trendingSearches[i].title.query
-        //-         .search-count
-        //-           p.visible.mb-1.text-muted= trendsObj.default.trendingSearchesDays[0].trendingSearches[i].formattedTraffic
-        //-         .feed-item-image-wrapper
-        //-           a(href=trendsObj.default.trendingSearchesDays[0].trendingSearches[i].image.newsUrl)
-        //-             img(src=trendsObj.default.trendingSearchesDays[0].trendingSearches[i].image.imageUrl)
-        //-             .image-text= trendsObj.default.trendingSearchesDays[0].trendingSearches[i].image.source
-        //-             - i++;
-
-        //- .content-header-title= trendsObj.default.trendingSearchesDays[1].formattedDate
-        //- - j = 0
-        //- - day++
-        //- while j < trendsLengthYesterday
-        //-   .feed-list-wrapper.card
-        //-     .feed-item.card-body.align-items-start
-        //-       .details-wrapper
-        //-         .index.d-inline-block.mb-2.text-primary= j+1
-        //-         a.title.mb-0.text-dark(href='http://localhost:3000/trends/details/' +trendsObj.default.trendingSearchesDays[1].trendingSearches[j].title.query)= trendsObj.default.trendingSearchesDays[1].trendingSearches[j].title.query
-        //-         .search-count
-        //-           a.visible.mb-1.text-muted(href=trendsObj.default.trendingSearchesDays[1].trendingSearches[j].image.newsUrl)= trendsObj.default.trendingSearchesDays[1].trendingSearches[j].formattedTraffic
-        //-         .feed-item-image-wrapper
-        //-           img(src=trendsObj.default.trendingSearchesDays[1].trendingSearches[j].image.imageUrl)
-        //-           .image-text= trendsObj.default.trendingSearchesDays[1].trendingSearches[j].image.source
-        //-           - j++;
-
-
-                //- - j = 0;
-                //- while j < 10
-                //-   li.list-group-item.list-group-item-action
-                //-     //- TODO: 서버 아이피로 변경 필요 
-                //-     a(href='http://localhost:3000/trends/details/'+i+j)= j+1 + '. ' + obj.data.chartList[i].trendingChart.entityList[j].title
-                //-   - j++;
               
