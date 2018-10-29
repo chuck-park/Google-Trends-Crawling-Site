@@ -10,13 +10,13 @@ block content
           each content, j in day.trendingSearches
             .feed-list-wrapper.card
               .feed-item.card-body.align-items-start
+                .index.d-inline-block.mb-2.text-primary= j+1
                 .details-wrapper
-                  .index.d-inline-block.mb-2.text-primary= j+1
                   a.title.mb-0(href='/trends/details/' + content.title.query)= content.title.query
                   .search-count
                     p.visible.mb-1.text-muted= content.formattedTraffic
-                  .feed-item-image-wrapper
-                    a(href=content.image.newsUrl)
-                      img(src=content.image.imageUrl)
-                      .image-text= content.image.source
+                .feed-item-image-wrapper
+                  a(href=content.image.newsUrl)
+                    img(src=content.image.imageUrl)
+                    .image-text= content.image.source
               
