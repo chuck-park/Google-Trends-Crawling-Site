@@ -10,7 +10,6 @@ var flash = require('connect-flash');
 var indexRouter = require('./routes/index');
 var trendsRouter = require('./routes/trends');
 var crawlerRouter = require('./routes/crawler');
-var airticketRouter = require('./routes/airticket')
 
 var app = express();
 
@@ -49,7 +48,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/trends', trendsRouter);
 app.use('/crawler', crawlerRouter);
-app.use('/airticket', airticketRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

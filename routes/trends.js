@@ -13,6 +13,7 @@ const naver_client_id = 'rcB_GneSUHAEXt5u2l44';
 // for heroku deploy
 const naver_client_secret = '3lsUdlvgMm';
 const youtube_key = 'AIzaSyCLaLlU7B9SuyX-GqK24z7L2CRt40ZmdKM';
+
 // for localhost
 // const naver_client_secret = process.env.NAVER_API_KEY;
 // const youtube_key = process.env.YOUTUBE_API_KEY;
