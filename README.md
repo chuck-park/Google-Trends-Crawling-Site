@@ -1,4 +1,4 @@
-# NAVER-CAMPUS-HACKDAY-RESUME
+# Google Trends Crawling site
 네이버 캠퍼스 핵데이에 참가하기 위해 만든 레포지토리입니다.
 참가하고 싶은 이슈에 대한 개발 관련 경험이 적어서 해당 이슈의 개발 요구 사항을 참고하여 데모 버전을 직접 만들어 보았습니다.
 Heroku를 사용하여 deploy하였으며 첫 페이지에서 5번과 7번 이슈를 선택할 수 있습니다.
